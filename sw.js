@@ -1,26 +1,49 @@
-const CACHE = 'energeticos-solar-v2.0.0';
-const CORE = [
-  './', './index.html', './styles.css', './app.js', './manifest.webmanifest',
-  './assets/logo.png', './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png'
+/* Service Worker — ENERGÉTICOS Solicitud Solar PWA */
+const CACHE = 'energeticos-solicitud-v1';
+const ASSETS = [
+  'solicitud.html',
+  'manifest.webmanifest',
+  'icon-192.png',
+  'icon-512.png',
+  'icon-maskable.png',
+  'apple-touch-icon.png'
 ];
-const GALLERY = Array.from({length:18},(_,i)=>`./assets/gallery/obra-${String(i+1).padStart(2,'0')}.webp`);
 
+// Instalación: precachear los recursos de la app
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll([...CORE, ...GALLERY])).then(() => self.skipWaiting()));
+  event.waitUntil(
+    caches.open(CACHE)
+      .then(cache => cache.addAll(ASSETS))
+      .then(() => self.skipWaiting())
+      .catch(() => {})
+  );
 });
 
+// Activación: limpiar cachés antiguos
 self.addEventListener('activate', event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim()));
+  event.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
 });
 
+// Fetch: estrategia "cache first" con respaldo a red
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
-      if (!response || response.status !== 200 || response.type === 'opaque') return response;
-      const copy = response.clone();
-      caches.open(CACHE).then(cache => cache.put(event.request, copy));
-      return response;
-    }).catch(() => caches.match('./index.html')))
+    caches.match(event.request).then(cached => {
+      if (cached) return cached;
+      return fetch(event.request)
+        .then(resp => {
+          // Guardar copias de recursos propios
+          if (resp && resp.status === 200 && resp.type === 'basic') {
+            const copy = resp.clone();
+            caches.open(CACHE).then(c => c.put(event.request, copy)).catch(() => {});
+          }
+          return resp;
+        })
+        .catch(() => cached);
+    })
   );
 });
