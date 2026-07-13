@@ -1,0 +1,4 @@
+ENERGÉTICOS · Datos para Diseño Solar
+Versión 2.0.0
+Fecha de preparación: 2026-07-12
+Aplicación PWA instalable para recopilación de datos fotovoltaicos.

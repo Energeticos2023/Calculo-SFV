@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b2a3b">
+  <meta name="description" content="Aplicación de ENERGÉTICOS para recopilar datos técnicos y fotografías requeridas para el diseño preliminar de sistemas fotovoltaicos.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ENERGÉTICOS Solar">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>ENERGÉTICOS · Datos para Diseño Solar</title>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-row">
+      <button class="brand" type="button" id="brandBtn" aria-label="Información de ENERGÉTICOS">
+        <img src="assets/logo.png" alt="ENERGÉTICOS · Servicios del Sector Eléctrico">
+      </button>
+      <div class="header-actions">
+        <span class="status-pill" id="netStatus">En línea</span>
+        <button type="button" class="icon-btn" id="installBtn" title="Instalar aplicación" aria-label="Instalar aplicación">⬇</button>
+      </div>
+    </div>
+    <div class="progress-area" id="progressArea" hidden>
+      <div class="progress-meta"><span id="stepLabel">Paso 1 de 8</span><strong id="stepName">Cliente</strong></div>
+      <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <form id="solarForm" novalidate>
+      <section class="step active" data-step="0" data-name="Inicio">
+        <article class="hero-card">
+          <div class="hero-media">
+            <img id="heroImage" src="assets/gallery/obra-02.webp" alt="Instalación fotovoltaica ejecutada por ENERGÉTICOS">
+            <div class="hero-badge">Trabajos reales de ENERGÉTICOS</div>
+          </div>
+          <div class="hero-copy">
+            <p class="eyebrow">Evaluación preliminar sin visita técnica</p>
+            <h1>Datos para diseñar su sistema fotovoltaico</h1>
+            <p>Complete la información y tome las fotografías solicitadas. Con estos datos, nuestro especialista podrá preparar una solución técnica y una cotización inicial acorde con su necesidad.</p>
+            <div class="notice important">
+              <span>✓</span>
+              <div><strong>La precisión del diseño depende de sus datos.</strong><br>Revise potencias, horarios de uso, recibo eléctrico, tablero, techo y distancias.</div>
+            </div>
+            <button type="button" class="btn primary wide" data-next>Comenzar evaluación</button>
+            <button type="button" class="btn text wide" id="requirementsBtn">Ver qué información necesitará</button>
+          </div>
+        </article>
+
+        <section class="trust-grid">
+          <article><span>☀️</span><strong>Sistemas autónomos</strong><small>Para lugares sin red eléctrica.</small></article>
+          <article><span>⚡</span><strong>Conectados a red</strong><small>Para reducir consumo y recibos.</small></article>
+          <article><span>🔋</span><strong>Sistemas híbridos</strong><small>Red eléctrica con respaldo.</small></article>
+          <article><span>💧</span><strong>Bombeo solar</strong><small>Agua con energía fotovoltaica.</small></article>
+        </section>
+
+        <section class="works-section" aria-label="Galería de trabajos fotovoltaicos ejecutados">
+          <div class="works-head"><div><p class="eyebrow">Experiencia comprobada</p><h2>Trabajos fotovoltaicos ejecutados</h2></div><span>Fotos reales</span></div>
+          <div class="works-scroll">
+            <img src="assets/gallery/obra-04.webp" alt="Montaje de módulos fotovoltaicos por ENERGÉTICOS" loading="lazy">
+            <img src="assets/gallery/obra-08.webp" alt="Personal técnico instalando paneles solares" loading="lazy">
+            <img src="assets/gallery/obra-10.webp" alt="Sistema fotovoltaico instalado en techo" loading="lazy">
+            <img src="assets/gallery/obra-13.webp" alt="Ajuste técnico de módulos fotovoltaicos" loading="lazy">
+            <img src="assets/gallery/obra-16.webp" alt="Inspección de paneles solares" loading="lazy">
+            <img src="assets/gallery/obra-18.webp" alt="Campo fotovoltaico instalado" loading="lazy">
+          </div>
+        </section>
+
+        <section class="company-strip">
+          <img src="assets/logo.png" alt="Logo ENERGÉTICOS">
+          <div>
+            <strong>Corporación RyC Contratistas Generales S.A.C.</strong>
+            <span>RUC 20533666273 · Huaraz, Áncash</span>
+          </div>
+        </section>
+      </section>
+
+      <section class="step" data-step="1" data-name="Cliente y ubicación">
+        <div class="section-head">
+          <p class="eyebrow">Información básica</p>
+          <h2>¿A quién y dónde atenderemos?</h2>
+          <p>Estos datos permiten identificar el proyecto, calcular la radiación solar del lugar y comunicarnos con usted.</p>
+        </div>
+
+        <div class="card">
+          <h3>Datos del cliente</h3>
+          <div class="field-grid two">
+            <label class="field"><span>Nombres y apellidos <b>*</b></span><input name="clientName" autocomplete="name" required placeholder="Ej. Juan Pérez López"></label>
+            <label class="field"><span>Celular / WhatsApp <b>*</b></span><input name="clientPhone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="Ej. 999 999 999"></label>
+            <label class="field"><span>DNI o RUC</span><input name="clientId" inputmode="numeric" placeholder="Opcional"></label>
+            <label class="field"><span>Correo electrónico</span><input name="clientEmail" type="email" autocomplete="email" placeholder="Opcional"></label>
+            <label class="field"><span>Tipo de cliente</span><select name="clientType"><option>Vivienda</option><option>Comercio</option><option>Empresa</option><option>Institución pública</option><option>Actividad agrícola</option><option>Actividad industrial</option><option>Otro</option></select></label>
+            <label class="field"><span>Persona de contacto en el lugar</span><input name="siteContact" placeholder="Si es diferente al cliente"></label>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Ubicación del proyecto</h3>
+          <div class="field-grid two">
+            <label class="field"><span>Departamento <b>*</b></span><input name="department" required value="Áncash" placeholder="Departamento"></label>
+            <label class="field"><span>Provincia <b>*</b></span><input name="province" required placeholder="Provincia"></label>
+            <label class="field"><span>Distrito <b>*</b></span><input name="district" required placeholder="Distrito"></label>
+            <label class="field"><span>Centro poblado / sector</span><input name="sector" placeholder="Opcional"></label>
+          </div>
+          <label class="field"><span>Dirección o referencia <b>*</b></span><textarea name="address" required placeholder="Calle, número, referencia, color de fachada, etc."></textarea></label>
+          <div class="gps-row">
+            <label class="field grow"><span>Coordenadas GPS</span><input name="gps" id="gpsField" readonly placeholder="Latitud, longitud"></label>
+            <button type="button" class="btn secondary" id="gpsBtn">📍 Obtener ubicación</button>
+          </div>
+          <label class="field"><span>Enlace de Google Maps</span><input name="mapLink" type="url" placeholder="Pegue aquí el enlace de ubicación, si lo tiene"></label>
+        </div>
+      </section>
+
+      <section class="step" data-step="2" data-name="Necesidad del sistema">
+        <div class="section-head">
+          <p class="eyebrow">Objetivo del proyecto</p>
+          <h2>¿Qué solución necesita?</h2>
+          <p>Seleccione la alternativa más cercana. Nuestro especialista verificará técnicamente la opción final.</p>
+        </div>
+
+        <div class="choice-grid" id="systemChoices">
+          <label class="choice-card"><input type="radio" name="systemType" value="Sistema fotovoltaico autónomo" required><span class="choice-icon">🏠</span><strong>Sistema autónomo</strong><small>No existe red eléctrica o se desea independencia total.</small></label>
+          <label class="choice-card"><input type="radio" name="systemType" value="Sistema fotovoltaico conectado a red"><span class="choice-icon">⚡</span><strong>Conectado a red</strong><small>Busca reducir el consumo y el costo mensual.</small></label>
+          <label class="choice-card"><input type="radio" name="systemType" value="Sistema fotovoltaico híbrido"><span class="choice-icon">🔋</span><strong>Híbrido con baterías</strong><small>Red eléctrica, ahorro y respaldo ante cortes.</small></label>
+          <label class="choice-card"><input type="radio" name="systemType" value="Sistema de bombeo solar"><span class="choice-icon">💧</span><strong>Bombeo solar</strong><small>Para pozo, reservorio, riego o abastecimiento.</small></label>
+          <label class="choice-card"><input type="radio" name="systemType" value="Evaluación de la mejor alternativa"><span class="choice-icon">🧭</span><strong>No estoy seguro</strong><small>ENERGÉTICOS evaluará la mejor alternativa.</small></label>
+        </div>
+
+        <div class="card">
+          <h3>Prioridad del cliente</h3>
+          <div class="field-grid two">
+            <label class="field"><span>Principal objetivo <b>*</b></span><select name="mainGoal" required><option value="">Seleccione</option><option>Tener energía donde no existe red</option><option>Reducir el recibo eléctrico</option><option>Contar con respaldo ante cortes</option><option>Alimentar cargas críticas</option><option>Bombear agua</option><option>Ampliar capacidad eléctrica</option><option>Otro</option></select></label>
+            <label class="field"><span>¿Para cuándo lo necesita?</span><select name="desiredDate"><option>Lo antes posible</option><option>En menos de 1 mes</option><option>Entre 1 y 3 meses</option><option>Entre 3 y 6 meses</option><option>Solo estoy evaluando</option></select></label>
+            <label class="field"><span>Presupuesto referencial</span><select name="budget"><option>No definido</option><option>Hasta S/ 5,000</option><option>S/ 5,000 a S/ 10,000</option><option>S/ 10,000 a S/ 20,000</option><option>S/ 20,000 a S/ 50,000</option><option>Más de S/ 50,000</option></select></label>
+            <label class="field"><span>Forma de pago prevista</span><select name="payment"><option>Por definir</option><option>Contado</option><option>Financiamiento</option><option>Por etapas</option></select></label>
+          </div>
+          <label class="field"><span>Explique brevemente lo que espera del sistema</span><textarea name="expectation" placeholder="Ej. Necesito que funcionen refrigeradora, luces, televisión e internet durante todo el día."></textarea></label>
+        </div>
+      </section>
+
+      <section class="step" data-step="3" data-name="Servicio eléctrico">
+        <div class="section-head">
+          <p class="eyebrow">Suministro actual</p>
+          <h2>Datos de la instalación eléctrica</h2>
+          <p>El recibo, el medidor y el interruptor principal son claves para definir el tipo y capacidad del sistema.</p>
+        </div>
+
+        <div class="card">
+          <div class="segmented" id="supplySegment">
+            <label><input type="radio" name="hasGrid" value="Sí" checked><span>Sí tengo electricidad</span></label>
+            <label><input type="radio" name="hasGrid" value="No"><span>No tengo electricidad</span></label>
+          </div>
+          <div id="gridFields">
+            <div class="field-grid two">
+              <label class="field"><span>Empresa distribuidora</span><input name="utility" placeholder="Ej. Hidrandina, Enel, SEAL"></label>
+              <label class="field"><span>Número de suministro</span><input name="supplyNumber" placeholder="Figura en el recibo"></label>
+              <label class="field"><span>Pago mensual promedio (S/)</span><input name="monthlyBill" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Ej. 280"></label>
+              <label class="field"><span>Consumo mensual promedio (kWh)</span><input name="monthlyKwh" type="number" min="0" step="0.1" inputmode="decimal" placeholder="Figura en el recibo"></label>
+              <label class="field"><span>Tipo de suministro</span><select name="phase"><option>No sé</option><option>Monofásico</option><option>Trifásico</option></select></label>
+              <label class="field"><span>Tensión</span><select name="voltage"><option>No sé</option><option>220 V</option><option>380/220 V</option><option>440/220 V</option><option>Otra</option></select></label>
+              <label class="field"><span>Interruptor principal (A)</span><input name="mainBreaker" type="number" min="0" inputmode="numeric" placeholder="Ej. 40"></label>
+              <label class="field"><span>Frecuencia de cortes</span><select name="outageFrequency"><option>No hay cortes frecuentes</option><option>1 a 2 veces al mes</option><option>Varias veces al mes</option><option>Varias veces por semana</option><option>Diariamente</option></select></label>
+            </div>
+          </div>
+          <div id="noGridFields" hidden>
+            <div class="field-grid two">
+              <label class="field"><span>Fuente actual de energía</span><select name="currentSource"><option>Ninguna</option><option>Grupo electrógeno</option><option>Sistema solar existente</option><option>Baterías / inversor</option><option>Red de un vecino</option><option>Otra</option></select></label>
+              <label class="field"><span>Horas de energía disponibles al día</span><input name="currentHours" type="number" min="0" max="24" step="0.5" inputmode="decimal"></label>
+              <label class="field"><span>Gasto mensual actual (S/)</span><input name="currentCost" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Combustible u otros"></label>
+              <label class="field"><span>¿La red eléctrica llegará próximamente?</span><select name="futureGrid"><option>No se sabe</option><option>No</option><option>Sí, en menos de 1 año</option><option>Sí, en más de 1 año</option></select></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Fotografías eléctricas</h3>
+          <p class="card-note">Tome fotos claras, completas y sin reflejos. No retire tapas ni toque conductores energizados.</p>
+          <div class="photo-grid">
+            <div class="photo-uploader" data-category="bill"><input type="file" accept="image/*" capture="environment" multiple><button type="button"><span>🧾</span><strong>Recibo de luz</strong><small>Foto completa, ambas caras si corresponde</small></button><div class="thumb-list"></div></div>
+            <div class="photo-uploader" data-category="meter"><input type="file" accept="image/*" capture="environment" multiple><button type="button"><span>🔢</span><strong>Medidor eléctrico</strong><small>Que se vea placa, lectura y entorno</small></button><div class="thumb-list"></div></div>
+            <div class="photo-uploader" data-category="board"><input type="file" accept="image/*" capture="environment" multiple><button type="button"><span>🧰</span><strong>Tablero eléctrico</strong><small>Vista general e interruptor principal</small></button><div class="thumb-list"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-step="4" data-name="Consumo y equipos">
+        <div class="section-head">
+          <p class="eyebrow">Inventario de cargas</p>
+          <h2>¿Qué equipos debe alimentar el sistema?</h2>
+          <p>Marque los equipos, revise su potencia y coloque cuántas horas funcionan al día. Puede corregir los valores usando la placa del equipo.</p>
+        </div>
+
+        <div class="card">
+          <h3>Seleccione equipos frecuentes</h3>
+          <div class="preset-grid" id="presetGrid"></div>
+          <button type="button" class="btn secondary wide" id="addCustomLoad">＋ Agregar otro equipo</button>
+        </div>
+
+        <div id="loadRows" class="load-rows"></div>
+
+        <div class="stats-card" id="loadStats">
+          <div><span>Potencia conectada</span><strong id="connectedPower">0 W</strong></div>
+          <div><span>Energía diaria referencial</span><strong id="dailyEnergy">0.00 kWh/día</strong></div>
+          <div><span>Energía crítica</span><strong id="criticalEnergy">0.00 kWh/día</strong></div>
+        </div>
+        <p class="fine-print">Los valores calculados son referenciales. El diseño final considerará simultaneidad, picos de arranque, pérdidas, temperatura, radiación, orientación y autonomía.</p>
+
+        <div class="card">
+          <h3>Fotografías de placas</h3>
+          <p class="card-note">Priorice refrigeradoras, congeladoras, bombas, motores, soldadoras, hornos, cocinas, termas, aires acondicionados y equipos industriales.</p>
+          <div class="photo-uploader single-wide" data-category="nameplates"><input type="file" accept="image/*" capture="environment" multiple><button type="button"><span>📷</span><strong>Tomar fotos de las placas técnicas</strong><small>Que se lean W, kW, HP, V, A y modelo</small></button><div class="thumb-list"></div></div>
+        </div>
+      </section>
+
+      <section class="step" data-step="5" data-name="Techo y montaje">
+        <div class="section-head">
+          <p class="eyebrow">Área disponible</p>
+          <h2>¿Dónde se instalarán los paneles?</h2>
+          <p>Las medidas, sombras, material y acceso permiten definir la cantidad de módulos y la estructura de soporte.</p>
+        </div>
+
+        <div class="card">
+          <div class="field-grid two">
+            <label class="field"><span>Lugar previsto</span><select name="installPlace"><option>Techo de concreto</option><option>Techo metálico / calamina</option><option>Techo de teja</option><option>Terreno</option><option>Estructura elevada</option><option>No definido</option></select></label>
+            <label class="field"><span>Estado del techo</span><select name="roofCondition"><option>Bueno</option><option>Regular</option><option>Requiere reparación</option><option>No sé</option></select></label>
+            <label class="field"><span>Largo disponible (m)</span><input name="roofLength" id="roofLength" type="number" min="0" step="0.1" inputmode="decimal" placeholder="Ej. 8"></label>
+            <label class="field"><span>Ancho disponible (m)</span><input name="roofWidth" id="roofWidth" type="number" min="0" step="0.1" inputmode="decimal" placeholder="Ej. 5"></label>
+            <label class="field"><span>Área estimada</span><input name="roofArea" id="roofArea" readonly placeholder="Se calcula automáticamente"></label>
+            <label class="field"><span>Número de pisos / altura</span><input name="buildingHeight" placeholder="Ej. 3 pisos"></label>
+            <label class="field"><span>Orientación del área</span><select name="orientation"><option>No sé</option><option>Norte</option><option>Noreste</option><option>Noroeste</option><option>Este</option><option>Oeste</option><option>Sur</option></select></label>
+            <label class="field"><span>Inclinación aproximada</span><select name="tilt"><option>Techo plano</option><option>Menor de 10°</option><option>10° a 20°</option><option>Más de 20°</option><option>No sé</option></select></label>
+            <label class="field"><span>¿Hay sombras?</span><select name="shading"><option>No se observan sombras</option><option>Solo temprano</option><option>Solo por la tarde</option><option>Varias horas al día</option><option>No sé</option></select></label>
+            <label class="field"><span>Acceso al techo</span><select name="roofAccess"><option>Escalera fija</option><option>Escalera portátil</option><option>Escalera interna</option><option>Acceso difícil</option><option>No sé</option></select></label>
+            <label class="field"><span>Distancia techo–tablero (m)</span><input name="roofBoardDistance" type="number" min="0" step="0.5" inputmode="decimal" placeholder="Recorrido aproximado"></label>
+            <label class="field"><span>Espacio para inversor/baterías</span><select name="equipmentSpace"><option>Sí, interior ventilado</option><option>Sí, exterior protegido</option><option>Aún no definido</option><option>No hay espacio identificado</option></select></label>
+          </div>
+          <label class="field"><span>Obstáculos o comentarios del lugar</span><textarea name="siteNotes" placeholder="Tanques, antenas, muros, árboles, edificios cercanos, zonas con humedad, corrosión, polvo, etc."></textarea></label>
+        </div>
+
+        <div class="card">
+          <h3>Fotografías del lugar</h3>
+          <p class="card-note">Tome varias fotos horizontales: vista completa, sombras, obstáculos y recorrido hacia el tablero.</p>
+          <div class="photo-grid">
+            <div class="photo-uploader" data-category="roof"><input type="file" accept="image/*" capture="environment" multiple><button type="button"><span>🏠</span><strong>Techo o terreno</strong><small>Vista general desde varios ángulos</small></button><div class="thumb-list"></div></div>
+            <div class="photo-uploader" data-category="shadows"><input type="file" accept="image/*" capture="environment" multiple><button type="button"><span>🌳</span><strong>Sombras y obstáculos</strong><small>Árboles, muros, tanques, antenas</small></button><div class="thumb-list"></div></div>
+            <div class="photo-uploader" data-category="route"><input type="file" accept="image/*" capture="environment" multiple><button type="button"><span>↘️</span><strong>Ruta de cableado</strong><small>Del techo al tablero o equipo</small></button><div class="thumb-list"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-step="6" data-name="Autonomía o bombeo">
+        <div class="section-head">
+          <p class="eyebrow">Condiciones especiales</p>
+          <h2 id="specialTitle">Respaldo y autonomía</h2>
+          <p id="specialDesc">Indique cuánto tiempo deben funcionar las cargas cuando no haya sol o se interrumpa la red.</p>
+        </div>
+
+        <div id="batterySection">
+          <div class="card">
+            <div class="field-grid two">
+              <label class="field"><span>Horas de respaldo requeridas</span><select name="backupHours"><option>No necesito baterías</option><option>2 horas</option><option>4 horas</option><option>6 horas</option><option>8 horas</option><option>12 horas</option><option>24 horas</option><option>Más de 24 horas</option></select></label>
+              <label class="field"><span>Días de autonomía</span><select name="autonomyDays"><option>0 días</option><option>0.5 día</option><option>1 día</option><option>2 días</option><option>3 días</option><option>Más de 3 días</option><option>No sé</option></select></label>
+              <label class="field"><span>Tipo de batería preferida</span><select name="batteryPreference"><option>Que ENERGÉTICOS recomiende</option><option>Litio</option><option>Gel / AGM</option><option>No deseo baterías</option></select></label>
+              <label class="field"><span>Uso nocturno principal</span><input name="nightUse" placeholder="Ej. Luces, TV, refrigeradora, internet"></label>
+            </div>
+            <label class="field"><span>¿Qué equipos son indispensables durante un corte?</span><textarea name="criticalNotes" placeholder="Los equipos marcados como críticos ya aparecen en el cálculo; agregue aquí cualquier condición especial."></textarea></label>
+          </div>
+        </div>
+
+        <div id="pumpSection" hidden>
+          <div class="card">
+            <h3>Datos hidráulicos y eléctricos de la bomba</h3>
+            <div class="field-grid two">
+              <label class="field"><span>Aplicación</span><select name="pumpUse"><option>Abastecimiento de agua</option><option>Riego</option><option>Llenado de reservorio</option><option>Ganadería</option><option>Proceso industrial</option><option>Otro</option></select></label>
+              <label class="field"><span>Tipo de bomba</span><select name="pumpType"><option>No sé</option><option>Sumergible</option><option>Superficial</option><option>Centrífuga</option><option>Helicoidal</option><option>Otra</option></select></label>
+              <label class="field"><span>Potencia (HP)</span><input name="pumpHp" type="number" min="0" step="0.1" inputmode="decimal"></label>
+              <label class="field"><span>Potencia (kW)</span><input name="pumpKw" type="number" min="0" step="0.01" inputmode="decimal"></label>
+              <label class="field"><span>Tensión de la bomba</span><select name="pumpVoltage"><option>No sé</option><option>220 V monofásica</option><option>220 V trifásica</option><option>380 V trifásica</option><option>440 V trifásica</option><option>Otra</option></select></label>
+              <label class="field"><span>Caudal requerido (m³/día)</span><input name="dailyWater" type="number" min="0" step="0.1" inputmode="decimal"></label>
+              <label class="field"><span>Profundidad del agua (m)</span><input name="waterDepth" type="number" min="0" step="0.1" inputmode="decimal"></label>
+              <label class="field"><span>Altura hasta el tanque (m)</span><input name="tankHeight" type="number" min="0" step="0.1" inputmode="decimal"></label>
+              <label class="field"><span>Distancia horizontal (m)</span><input name="horizontalDistance" type="number" min="0" step="0.1" inputmode="decimal"></label>
+              <label class="field"><span>Diámetro de tubería</span><input name="pipeDiameter" placeholder="Ej. 1½ pulgadas"></label>
+              <label class="field"><span>Horas de bombeo disponibles</span><input name="pumpHours" type="number" min="0" max="24" step="0.5" inputmode="decimal"></label>
+              <label class="field"><span>¿Existe reservorio?</span><select name="hasReservoir"><option>Sí</option><option>No</option><option>Se construirá</option></select></label>
+            </div>
+            <label class="field"><span>Descripción adicional del bombeo</span><textarea name="pumpNotes" placeholder="Fuente de agua, nivel dinámico, temporada seca, presión requerida, riego por goteo, etc."></textarea></label>
+          </div>
+          <div class="card">
+            <h3>Fotografías de bombeo</h3>
+            <div class="photo-grid">
+              <div class="photo-uploader" data-category="pumpPlate"><input type="file" accept="image/*" capture="environment" multiple><button type="button"><span>🏷️</span><strong>Placa de la bomba</strong><small>Modelo, HP, V, A, caudal y altura</small></button><div class="thumb-list"></div></div>
+              <div class="photo-uploader" data-category="waterSource"><input type="file" accept="image/*" capture="environment" multiple><button type="button"><span>💦</span><strong>Fuente de agua</strong><small>Pozo, canal, río o reservorio</small></button><div class="thumb-list"></div></div>
+              <div class="photo-uploader" data-category="tank"><input type="file" accept="image/*" capture="environment" multiple><button type="button"><span>🛢️</span><strong>Tanque o descarga</strong><small>Punto final y recorrido de tubería</small></button><div class="thumb-list"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-step="7" data-name="Revisión y autorización">
+        <div class="section-head">
+          <p class="eyebrow">Última verificación</p>
+          <h2>Revise antes de enviar</h2>
+          <p>Puede regresar y corregir cualquier dato. La aplicación guarda el avance en este celular.</p>
+        </div>
+
+        <div class="checklist" id="qualityChecklist"></div>
+
+        <div class="card">
+          <h3>Observaciones finales</h3>
+          <label class="field"><span>Comentarios adicionales</span><textarea name="finalNotes" placeholder="Restricciones de acceso, horarios, ampliaciones futuras, marcas preferidas u otra información."></textarea></label>
+          <label class="check-field"><input type="checkbox" name="truthDeclaration" required><span>Declaro que la información y fotografías proporcionadas corresponden al lugar y a los equipos del proyecto. Entiendo que la propuesta será preliminar y que, antes de ejecutar la instalación, ENERGÉTICOS podrá requerir una verificación técnica.</span></label>
+          <label class="check-field"><input type="checkbox" name="dataConsent" required><span>Autorizo a Corporación RyC Contratistas Generales S.A.C. a utilizar estos datos exclusivamente para evaluar, diseñar, cotizar y atender este proyecto.</span></label>
+        </div>
+      </section>
+
+      <section class="step" data-step="8" data-name="Expediente listo">
+        <div class="complete-head">
+          <span class="complete-icon">✓</span>
+          <p class="eyebrow">Evaluación completada</p>
+          <h2 id="completeTitle">Su expediente está listo</h2>
+          <p>Envíe el resumen y las fotografías al especialista de ENERGÉTICOS.</p>
+        </div>
+
+        <div class="result-metrics">
+          <article><span>Potencia conectada</span><strong id="resultPower">0 W</strong></article>
+          <article><span>Energía referencial</span><strong id="resultEnergy">0 kWh/día</strong></article>
+          <article><span>Fotografías</span><strong id="resultPhotos">0</strong></article>
+        </div>
+
+        <div class="card summary-card">
+          <div class="summary-head"><h3>Resumen para ENERGÉTICOS</h3><button type="button" class="btn mini" id="copySummary">Copiar</button></div>
+          <pre id="summaryText"></pre>
+        </div>
+
+        <div class="action-stack">
+          <button type="button" class="btn whatsapp wide" id="whatsappBtn">Enviar resumen por WhatsApp</button>
+          <button type="button" class="btn primary wide" id="shareDossierBtn">Compartir expediente y fotografías</button>
+          <button type="button" class="btn secondary wide" id="printReportBtn">Imprimir / guardar informe en PDF</button>
+          <button type="button" class="btn secondary wide" id="downloadBackupBtn">Descargar respaldo de datos</button>
+          <button type="button" class="btn text wide danger-text" id="newRequestBtn">Crear una nueva solicitud</button>
+        </div>
+
+        <div class="specialist-card">
+          <img src="assets/logo.png" alt="ENERGÉTICOS">
+          <div>
+            <strong>Ing. José Rafael Zeña Peche</strong>
+            <span>Ingeniero Mecánico Electricista · CIP 85540</span>
+            <span>Especialista en Sistemas Fotovoltaicos y Térmicos</span>
+            <a href="tel:+51942899919">+51 942 899 919</a>
+          </div>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <nav class="bottom-nav" id="bottomNav" hidden>
+    <button type="button" class="btn secondary" id="backBtn">Atrás</button>
+    <button type="button" class="btn primary grow" id="nextBtn">Continuar</button>
+  </nav>
+
+  <footer class="app-footer">
+    <strong>ENERGÉTICOS · Servicios del Sector Eléctrico</strong>
+    <span>Corporación RyC Contratistas Generales S.A.C. · RUC 20533666273</span>
+    <span>Jr. Augusto B. Leguía 563, Independencia, Huaraz, Áncash</span>
+    <span>WhatsApp 942 899 919 · energeticos.ryc@gmail.com</span>
+  </footer>
+
+  <dialog id="requirementsDialog" class="modal">
+    <button type="button" class="modal-close" data-close>×</button>
+    <h2>Antes de comenzar</h2>
+    <p>Tenga a la mano lo siguiente:</p>
+    <ol>
+      <li>Recibo de electricidad, si cuenta con servicio.</li>
+      <li>Fotos del medidor, tablero e interruptor principal.</li>
+      <li>Lista de equipos, cantidad y horas de uso.</li>
+      <li>Fotos de las placas de equipos de mayor consumo.</li>
+      <li>Medidas y fotos del techo o terreno.</li>
+      <li>Para bombeo: placa de bomba, profundidades, alturas, distancias y caudal.</li>
+    </ol>
+    <button type="button" class="btn primary wide" data-close>Entendido</button>
+  </dialog>
+
+  <dialog id="companyDialog" class="modal company-modal">
+    <button type="button" class="modal-close" data-close>×</button>
+    <img src="assets/logo.png" alt="ENERGÉTICOS">
+    <h2>ENERGÉTICOS</h2>
+    <p><strong>Razón social:</strong> Corporación RyC Contratistas Generales S.A.C.</p>
+    <p><strong>RUC:</strong> 20533666273</p>
+    <p><strong>Responsable técnico:</strong> Ing. José Rafael Zeña Peche, Ingeniero Mecánico Electricista, CIP 85540.</p>
+    <p><strong>Especialidad:</strong> Sistemas fotovoltaicos, sistemas solares térmicos e instalaciones eléctricas.</p>
+    <p><strong>Dirección:</strong> Jr. Augusto B. Leguía 563, Independencia, Huaraz, Áncash.</p>
+    <p><strong>Contacto:</strong> +51 942 899 919 · energeticos.ryc@gmail.com</p>
+  </dialog>
+
+  <dialog id="installDialog" class="modal">
+    <button type="button" class="modal-close" data-close>×</button>
+    <h2>Instalar en el celular</h2>
+    <div id="installInstructions"></div>
+    <button type="button" class="btn primary wide" data-close>Cerrar</button>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
