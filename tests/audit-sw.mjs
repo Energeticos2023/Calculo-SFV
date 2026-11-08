@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 const code=fs.readFileSync(new URL("../sw.js",import.meta.url),"utf8");
 const handlers={},deletes=[],saved=[];
 const caches={
- keys: async()=>["energeticos-solicitud-v1","energeticos-solicitud-v2-auditoria","tecgo-other","energeticos-solicitud-v999","energeticos-termas-third-party","Yacusol-app-private-cache"],
+ keys: async()=>["energeticos-solicitud-v1","energeticos-solicitud-v2-auditoria","tecgo-other","foreign-solicitud-v999","energeticos-termas-third-party","Yacusol-app-private-cache"],
  delete:async(name)=>{deletes.push(name);return true},
  open:async()=>({
   addAll:async()=>{},
